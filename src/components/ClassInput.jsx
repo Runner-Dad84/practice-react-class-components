@@ -6,8 +6,7 @@ class ClassInput extends Component {
     super(props);
 
     this.state = {
-      todos: [
-        {id='Just some demo tasks', 'As an example'],
+      todos: ['Laundry', 'Groceries'],
       inputVal: '',
     };
 
@@ -51,7 +50,7 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo) => (
-            <li key={todo}>{todo}</li>
+            <li key={todo} id={`id-${todo}`}>{todo}</li>
           ))}
         </ul>
       </section>
