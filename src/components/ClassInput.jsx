@@ -12,6 +12,7 @@ class ClassInput extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
 
   handleInputChange(e) {
@@ -50,7 +51,10 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo) => (
-            <li key={todo} id={`id-${todo}`}>{todo}</li>
+            <li key={todo} id={`id-${todo}`}>{todo}
+            <button>Completed</button>
+            
+            </li>
           ))}
         </ul>
       </section>
