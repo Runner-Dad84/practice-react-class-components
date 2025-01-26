@@ -12,7 +12,7 @@ class ClassInput extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
+    this.handleComplete = this.handleComplete.bind(this);
   }
 
   handleInputChange(e) {
@@ -28,6 +28,11 @@ class ClassInput extends Component {
       todos: state.todos.concat(state.inputVal),
       inputVal: '',
     }));
+  }
+
+  handleComplete(e) {
+    //some code here
+    
   }
 
   render() {
@@ -52,7 +57,7 @@ class ClassInput extends Component {
         <ul>
           {this.state.todos.map((todo) => (
             <li key={todo} id={`id-${todo}`}>{todo}
-            <button>Completed</button>
+            <button onClick={this.handleComplete}>Completed</button>
             
             </li>
           ))}
