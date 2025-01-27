@@ -30,9 +30,11 @@ class ClassInput extends Component {
     }));
   }
 
-  handleComplete(e) {
-    //some code here
-    
+  handleComplete(index) {
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((todo, i)=> i !== index)
+    }))
+   console.log('delete') ;
   }
 
   render() {
@@ -55,9 +57,9 @@ class ClassInput extends Component {
         <h4>All the tasks!</h4>
         {/* The list of all the To-Do's, displayed */}
         <ul>
-          {this.state.todos.map((todo) => (
-            <li key={todo} id={`id-${todo}`}>{todo}
-            <button onClick={this.handleComplete}>Completed</button>
+          {this.state.todos.map((todo, index) => (
+            <li key={todo} id={index}>{todo}
+            <button onClick={()=>this.handleComplete(index)}>Completed</button>
             
             </li>
           ))}
