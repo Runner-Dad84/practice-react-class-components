@@ -13,6 +13,7 @@ class ClassInput extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleInputChange(e) {
@@ -36,6 +37,15 @@ class ClassInput extends Component {
       todos: prevState.todos.filter((todo, i)=> i !== index)
     }))
    console.log('delete') ;
+  }
+
+  handleEdit(index) {
+    /*
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((todo, i)=> i !== index)
+    }))
+    */
+   console.log('edit') ;
   }
 
 
@@ -63,6 +73,7 @@ class ClassInput extends Component {
           {this.state.todos.map((todo, index) => (
             <li key={todo} id={index}>{todo}
             <button onClick={()=>this.handleComplete(index)}>Completed</button>
+            <button onClick={()=>this.handleEdit(index)}>Edit</button>
             </li>
           ))}
         </ul>
