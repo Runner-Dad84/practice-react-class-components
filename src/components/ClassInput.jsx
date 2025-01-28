@@ -28,6 +28,7 @@ class ClassInput extends Component {
       todos: state.todos.concat(state.inputVal),
       inputVal: '',
     }));
+    
   }
 
   handleComplete(index) {
@@ -36,6 +37,8 @@ class ClassInput extends Component {
     }))
    console.log('delete') ;
   }
+
+
 
   render() {
     return (
@@ -60,10 +63,10 @@ class ClassInput extends Component {
           {this.state.todos.map((todo, index) => (
             <li key={todo} id={index}>{todo}
             <button onClick={()=>this.handleComplete(index)}>Completed</button>
-            
             </li>
           ))}
         </ul>
+        <span>Tasks to Complete: {this.state.todos.length}</span>
       </section>
     );
   }
