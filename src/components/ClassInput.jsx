@@ -41,11 +41,11 @@ class ClassInput extends Component {
   }
 
   handleEdit(event){
-    const editID = event.target.id;
-    console.log(editID);
+    const targetID = event.target.id.replace('edit-', '');
+    console.log(targetID);
+
 
     
-  }
     /*
     this.setState((prevState) => ({
       todos: prevState.todos.filter((todo, i)=> i !== index)
