@@ -8,6 +8,7 @@ class ClassInput extends Component {
     this.state = {
       todos: ['Laundry', 'Groceries'],
       inputVal: '',
+      editStatus: 'Edit',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -39,13 +40,17 @@ class ClassInput extends Component {
    console.log('delete') ;
   }
 
-  handleEdit(index) {
+  handleEdit(event){
+    const editID = event.target.id;
+    console.log(editID);
+
+    
+  }
     /*
     this.setState((prevState) => ({
       todos: prevState.todos.filter((todo, i)=> i !== index)
     }))
     */
-   console.log('edit') ;
   }
 
 
@@ -72,8 +77,8 @@ class ClassInput extends Component {
         <ul>
           {this.state.todos.map((todo, index) => (
             <li key={todo} id={index}>{todo}
-            <button onClick={()=>this.handleComplete(index)}>Completed</button>
-            <button onClick={()=>this.handleEdit(index)}>Edit</button>
+            <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
+            <button id={`edit-${index}`} onClick= {this.handleEdit}>{this.state.editStatus}</button>
             </li>
           ))}
         </ul>
