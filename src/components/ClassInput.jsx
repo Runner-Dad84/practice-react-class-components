@@ -8,13 +8,13 @@ class ClassInput extends Component {
     this.state = {
       todos: ['Laundry', 'Groceries'],
       inputVal: '',
-      editStatus: 'Edit',
+      label: ['Edit', 'Edit'],
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
+    this.handleLabel = this.handleLabel.bind(this);
   }
 
   handleInputChange(e) {
@@ -30,27 +30,33 @@ class ClassInput extends Component {
       todos: state.todos.concat(state.inputVal),
       inputVal: '',
     }));
-    
+    this.setState((state) => ({
+      label: state.label.concat('Edit'),
+
+    }));
+    console.log(this.state.label);
   }
 
   handleComplete(index) {
     this.setState((prevState) => ({
       todos: prevState.todos.filter((todo, i)=> i !== index)
     }))
-   console.log('delete') ;
+   console.log('delete');
+   
   }
 
-  handleEdit(event){
-    const targetID = event.target.id.replace('edit-', '');
-    console.log(targetID);
-
-
+  handleLabel = (index) => {
+    const numIndex = Number(index);
+    console.log(numIndex);
     
-    /*
-    this.setState((prevState) => ({
-      todos: prevState.todos.filter((todo, i)=> i !== index)
-    }))
-    */
+    
+
+    this.setState((prevState) => {
+      const newLabels = [...prevState.label];
+      newLabels[numIndex] === 'Edit' ? newLabels[numIndex] = 'Resubmit' : newLabels[numIndex] = 'Edit';
+      return { label: newLabels };
+  
+      })
   }
 
 
@@ -77,8 +83,8 @@ class ClassInput extends Component {
         <ul>
           {this.state.todos.map((todo, index) => (
             <li key={todo} id={index}>{todo}
-            <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
-            <button id={`edit-${index}`} onClick= {this.handleEdit}>{this.state.editStatus}</button>
+              <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
+              <button id={`edit-${index}`} onClick= {()=> this.handleLabel(index, 'clicked')}>{this.state.label[Number(index)]}</button>
             </li>
           ))}
         </ul>
