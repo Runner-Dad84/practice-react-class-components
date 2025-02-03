@@ -38,8 +38,6 @@ class ClassInput extends Component {
     this.setState((state) => ({
       editInput: state.editInput.concat('closeInput'),
     }));
-
-    console.log(this.state.label);
   }
  /* Handles completed todo */
   handleComplete(index) {
@@ -63,7 +61,6 @@ class ClassInput extends Component {
         return { editInput: newClass };
 
       })
-    
   }
 
   render() {
