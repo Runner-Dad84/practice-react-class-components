@@ -9,6 +9,7 @@ class ClassInput extends Component {
       todos: ['Laundry', 'Groceries'],
       inputVal: '',
       label: ['Edit', 'Edit'],
+      editInput: ['closeInput', 'closeInput'],
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -32,8 +33,11 @@ class ClassInput extends Component {
     }));
     this.setState((state) => ({
       label: state.label.concat('Edit'),
-
     }));
+    this.setState((state) => ({
+      editInput: state.editInput.concat('closeInput'),
+    }));
+
     console.log(this.state.label);
   }
 
@@ -46,17 +50,22 @@ class ClassInput extends Component {
   }
 
   handleLabel = (index) => {
+
     const numIndex = Number(index);
     console.log(numIndex);
-    
-    
 
     this.setState((prevState) => {
       const newLabels = [...prevState.label];
       newLabels[numIndex] === 'Edit' ? newLabels[numIndex] = 'Resubmit' : newLabels[numIndex] = 'Edit';
       return { label: newLabels };
-  
       })
+    
+      this.setState((prevState) => {
+        const editInputs = [...prevState.editInput]
+        editInputs[numIndex] === 'closeInput' ? editInputs[numIndex] = 'openInput' :  editInputs[numIndex] = 'closeInput';
+
+      })
+    
   }
 
 
@@ -85,6 +94,14 @@ class ClassInput extends Component {
             <li key={todo} id={index}>{todo}
               <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
               <button id={`edit-${index}`} onClick= {()=> this.handleLabel(index, 'clicked')}>{this.state.label[Number(index)]}</button>
+              <input
+                type="text"
+                name="edit-entry"
+                value={this.state.inputVal}
+                onChange={this.handleInputChange}
+                className={this.state.editInput[index]}
+              >
+              </input>
             </li>
           ))}
         </ul>
