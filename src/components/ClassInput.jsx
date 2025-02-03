@@ -52,7 +52,7 @@ class ClassInput extends Component {
   handleLabel = (index) => {
 
     const numIndex = Number(index);
-    console.log(numIndex);
+    console.log(this.state.editInput[numIndex]);
 
     this.setState((prevState) => {
       const newLabels = [...prevState.label];
@@ -61,8 +61,9 @@ class ClassInput extends Component {
       })
     
       this.setState((prevState) => {
-        const editInputs = [...prevState.editInput]
-        editInputs[numIndex] === 'closeInput' ? editInputs[numIndex] = 'openInput' :  editInputs[numIndex] = 'closeInput';
+        const newClass = [...prevState.editInput]
+        newClass[numIndex] === 'closeInput' ? newClass[numIndex] = 'openInput' :  newClass[numIndex] = 'closeInput';
+        return { editInput: newClass };
 
       })
     
@@ -91,17 +92,20 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo, index) => (
-            <li key={todo} id={index}>{todo}
-              <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
-              <button id={`edit-${index}`} onClick= {()=> this.handleLabel(index, 'clicked')}>{this.state.label[Number(index)]}</button>
-              <input
+            <li key={todo} id={index}> {this.state.editInput[index] === 'closeInput' ? todo :
+                <input
                 type="text"
                 name="edit-entry"
                 value={this.state.inputVal}
                 onChange={this.handleInputChange}
                 className={this.state.editInput[index]}
               >
-              </input>
+              </input>}
+              {/*Mark as complete and remove todo*/}
+              <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
+              {/*Toggle between edit and resubmit*/}
+              <button id={`edit-${index}`} onClick= {()=> this.handleLabel(index, 'clicked')}>{this.state.label[Number(index)]}</button>
+             
             </li>
           ))}
         </ul>
