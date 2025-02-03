@@ -65,3 +65,12 @@ button {
   border-radius: 0.25rem;
   font-family: 'Merriweather', serif;
 }
+
+.openInput {
+  display: block;
+}
+
+.closeInput {
+  display: none;
+}
+
