@@ -18,13 +18,14 @@ class ClassInput extends Component {
     this.handleLabel = this.handleLabel.bind(this);
   }
 
+ /* Handles the initial value entered */
   handleInputChange(e) {
     this.setState((state) => ({
       ...state,
       inputVal: e.target.value,
     }));
   }
-
+  /* Handles the initial submit */
   handleSubmit(e) {
     e.preventDefault();
     this.setState((state) => ({
@@ -40,20 +41,16 @@ class ClassInput extends Component {
 
     console.log(this.state.label);
   }
-
+ /* Handles completed todo */
   handleComplete(index) {
     this.setState((prevState) => ({
       todos: prevState.todos.filter((todo, i)=> i !== index)
     }))
-   console.log('delete');
-   
   }
-
+  /* Handles edit button: (1) Change button label (2) Change class to display todo or input */
   handleLabel = (index) => {
-
     const numIndex = Number(index);
-    console.log(this.state.editInput[numIndex]);
-
+    
     this.setState((prevState) => {
       const newLabels = [...prevState.label];
       newLabels[numIndex] === 'Edit' ? newLabels[numIndex] = 'Resubmit' : newLabels[numIndex] = 'Edit';
@@ -68,8 +65,6 @@ class ClassInput extends Component {
       })
     
   }
-
-
 
   render() {
     return (
