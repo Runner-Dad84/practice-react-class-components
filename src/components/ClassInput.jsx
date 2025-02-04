@@ -8,6 +8,7 @@ class ClassInput extends Component {
     this.state = {
       todos: ['Laundry', 'Groceries'],
       inputVal: '',
+      newInput: '',
       label: ['Edit', 'Edit'],
       editInput: ['closeInput', 'closeInput'],
     };
@@ -16,6 +17,7 @@ class ClassInput extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.handleResubmit = this.handleResubmit.bind(this);
+    this.handleInputResubmit = this.handleInputResubmit.bind(this);
   }
 
  /* Handles the initial value entered */
@@ -42,25 +44,33 @@ class ClassInput extends Component {
  /* Handles completed todo */
   handleComplete(index) {
     this.setState((prevState) => ({
-      todos: prevState.todos.filter((todo, i)=> i !== index)
+      todos: prevState.todos.filter((todo, i)=> i !== index),
     }))
   }
+  handleInputResubmit(e) {
+    this.setState((state) => ({
+      ...state,
+      newInput: e.target.value,
+    }));
+  }
+
+
   /* Handles edit button: (1) Change button label (2) Change class to display todo or input */
   handleResubmit = (index) => {
     const numIndex = Number(index);
-    
+
     this.setState((prevState) => {
       const newLabels = [...prevState.label];
       newLabels[numIndex] === 'Edit' ? newLabels[numIndex] = 'Resubmit' : newLabels[numIndex] = 'Edit';
       return { label: newLabels };
-      })
-    
-      this.setState((prevState) => {
+    })
+
+    this.setState((prevState) => {
         const newClass = [...prevState.editInput]
         newClass[numIndex] === 'closeInput' ? newClass[numIndex] = 'openInput' :  newClass[numIndex] = 'closeInput';
         return { editInput: newClass };
+    }) 
 
-      })
   }
 
   render() {
@@ -88,8 +98,8 @@ class ClassInput extends Component {
                 <input
                 type="text"
                 name="edit-entry"
-                value={this.state.inputVal}
-                onChange={this.handleInputChange}
+                value={this.state.newInput}
+                onChange={this.handleInputResubmit}
                 className={this.state.editInput[index]}
               >
               </input>}
