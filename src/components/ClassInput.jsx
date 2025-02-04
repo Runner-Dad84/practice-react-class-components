@@ -15,7 +15,7 @@ class ClassInput extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
-    this.handleLabel = this.handleLabel.bind(this);
+    this.handleResubmit = this.handleResubmit.bind(this);
   }
 
  /* Handles the initial value entered */
@@ -46,7 +46,7 @@ class ClassInput extends Component {
     }))
   }
   /* Handles edit button: (1) Change button label (2) Change class to display todo or input */
-  handleLabel = (index) => {
+  handleResubmit = (index) => {
     const numIndex = Number(index);
     
     this.setState((prevState) => {
@@ -96,7 +96,7 @@ class ClassInput extends Component {
               {/*Mark as complete and remove todo*/}
               <button id={`compete-${index}`} onClick={()=>this.handleComplete(index)}>Completed</button>
               {/*Toggle between edit and resubmit*/}
-              <button id={`edit-${index}`} onClick= {()=> this.handleLabel(index, 'clicked')}>{this.state.label[Number(index)]}</button>
+              <button id={`edit-${index}`} onClick= {()=> this.handleResubmit(index, 'clicked')}>{this.state.label[Number(index)]}</button>
              
             </li>
           ))}
