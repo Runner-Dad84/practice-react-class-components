@@ -8,7 +8,7 @@ class ClassInput extends Component {
     this.state = {
       todos: ['Laundry', 'Groceries'],
       inputVal: '',
-      newInput: '',
+      newInput: ['',''],
       label: ['Edit', 'Edit'],
       editInput: ['closeInput', 'closeInput'],
     };
@@ -47,11 +47,12 @@ class ClassInput extends Component {
       todos: prevState.todos.filter((todo, i)=> i !== index),
     }))
   }
-  handleInputResubmit(e) {
-    this.setState((state) => ({
-      ...state,
-      newInput: e.target.value,
-    }));
+  handleInputResubmit(index, event) {
+    const numIndex = Number(index);
+    
+      const updatedInput = [...this.state.newInput];
+      updatedInput[numIndex] = event.target.value;
+      this.setState( {newInput: updatedInput} )
   }
 
 
@@ -70,7 +71,7 @@ class ClassInput extends Component {
         newClass[numIndex] === 'closeInput' ? newClass[numIndex] = 'openInput' :  newClass[numIndex] = 'closeInput';
         return { editInput: newClass };
     }) 
-
+     console.log(this.state.newInput);
   }
 
   render() {
@@ -98,8 +99,8 @@ class ClassInput extends Component {
                 <input
                 type="text"
                 name="edit-entry"
-                value={this.state.newInput}
-                onChange={this.handleInputResubmit}
+                value={this.state.newInput[index]}
+                onChange={(event) => this.handleInputResubmit(index, event)}
                 className={this.state.editInput[index]}
               >
               </input>}
